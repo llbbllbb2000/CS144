@@ -20,7 +20,7 @@ void get_URL(const string &host, const string &path) {
     URL_socket.write("GET " + path + " HTTP/1.1\r\nHost: " + host + "\r\nConnection: close\r\n\r\n");
     while (!URL_socket.eof()) {
         auto recv = URL_socket.read();
-        cout << recv << endl;
+        cout << recv;  // there is no need to add "endl". Otherwise the tests will be failed
     }
     URL_socket.close();
  
