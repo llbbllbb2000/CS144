@@ -3,6 +3,7 @@
 
 #include "byte_stream.hh"
 
+#include <vector>
 #include <cstdint>
 #include <string>
 
@@ -11,9 +12,16 @@
 class StreamReassembler {
   private:
     // Your code here -- add private members as necessary.
-
     ByteStream _output;  //!< The reassembled in-order byte stream
+    std::vector<char> _cache;  // the cache storing strings that are not in order
+    std::vector<bool> _cache_check; // whether the position stores a character or not
     size_t _capacity;    //!< The maximum number of bytes
+    size_t _cache_size;
+    uint64_t _next_index;
+    bool _eof;
+    uint64_t _eof_index;
+    void cache_insert(const uint64_t index, const std::string &data);
+    void cache_clear(const uint64_t left, const uint64_t right);
 
   public:
     //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.

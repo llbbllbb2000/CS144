@@ -1,29 +1,21 @@
 Lab 1 Writeup
 =============
 
-My name: [your name here]
+My name: llbbllbb2000
 
-My SUNet ID: [your sunetid here]
+I collaborated with: myself
 
-I collaborated with: [list sunetids here]
-
-I would like to thank/reward these classmates for their help: [list sunetids here]
-
-This lab took me about [n] hours to do. I [did/did not] attend the lab session.
+This lab took me about 3 hours to do.
 
 Program Structure and Design of the StreamReassembler:
-[]
+two loop back vectors
 
 Implementation Challenges:
-[]
+First : the problem with eof. The data may be in eof, but the Bytestream has not yet read it because of the unordered sequence.
+Second : the index may less than _next_index
+Third : when the data's size is bigger than capacity: I forget to clean the cache and to sum up to _next_index
 
 Remaining Bugs:
-[]
+All pass
 
-- Optional: I had unexpected difficulty with: [describe]
-
-- Optional: I think you could make this lab better by: [describe]
-
-- Optional: I was surprised by: [describe]
-
-- Optional: I'm not sure about: [describe]
+- Optional: I had unexpected difficulty with: the data structure I should use to cache strings
