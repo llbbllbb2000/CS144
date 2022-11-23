@@ -9,6 +9,9 @@
 //! \brief A complete endpoint of a TCP connection
 class TCPConnection {
   private:
+    size_t _received_tick_time{0};
+    bool _active{true};
+
     TCPConfig _cfg;
     TCPReceiver _receiver{_cfg.recv_capacity};
     TCPSender _sender{_cfg.send_capacity, _cfg.rt_timeout, _cfg.fixed_isn};
@@ -20,6 +23,12 @@ class TCPConnection {
     //! for 10 * _cfg.rt_timeout milliseconds after both streams have ended,
     //! in case the remote TCPConnection doesn't know we've received its whole stream?
     bool _linger_after_streams_finish{true};
+    void send_segments();
+    // fill the segment with ACK flag, ackno and window size
+    TCPSegment make_segments(TCPSegment seg);
+
+    void send_RST();
+    void unclean_shutdown();
 
   public:
     //! \name "Input" interface for the writer

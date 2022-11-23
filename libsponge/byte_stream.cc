@@ -15,11 +15,6 @@ using namespace std;
 ByteStream::ByteStream(const size_t capacity) : _capacity(capacity), _total_written(0), _total_pop(0), _buffer() {}
 
 size_t ByteStream::write(const string &data) {
-    /*if (_end) {
-        set_error(); 
-        return 0;
-    }*/
-
     size_t len = 0;
     for (auto &s : data) {
         if (_buffer.size() == _capacity) { break; }
