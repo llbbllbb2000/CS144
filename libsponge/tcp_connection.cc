@@ -130,7 +130,7 @@ void TCPConnection::tick(const size_t ms_since_last_tick) {
     send_segments();
 
     _received_tick_time += ms_since_last_tick;
-    // Option_A
+    // Option_A or Option_B
     if (_receiver.stream_out().eof()  //Pre 1
         && _sender.stream_in().eof()  //Pre 2
         && _sender.bytes_in_flight() == 0  //Pre 3
