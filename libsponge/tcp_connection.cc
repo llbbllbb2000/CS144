@@ -55,11 +55,6 @@ void TCPConnection::unclean_shutdown() {
 }
 
 void TCPConnection::segment_received(const TCPSegment &seg) { 
-    // means the connection is closed
-    if (!active()) {
-        return;
-    }
-
     // means TCPConnection received a new segment
     // the tick time should be restarted
     _received_tick_time = 0;
@@ -74,7 +69,7 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
     _receiver.segment_received(seg);
 
     // maybe the flag ack in segment is true
-    // but actually the receiver has no receive the syn
+    // but actually the receiver hasn't received the syn yet
     // so we need to avoid this bug
     if (!_receiver.ackno().has_value()) {
         return;
@@ -97,6 +92,7 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
     if (seg.length_in_sequence_space() > 0 && _sender.segments_out().empty()) {
         _sender.send_empty_segment();
     }
+
     send_segments();
 
     if (_receiver.stream_out().eof() && !_sender.stream_in().eof()) {
@@ -118,7 +114,7 @@ void TCPConnection::tick(const size_t ms_since_last_tick) {
     _sender.tick(ms_since_last_tick);
 
     // need to send a RST segment
-    // and must in front of send_segments()
+    // and must be in front of send_segments()
     // because if the time is out, we just need to send RST
     // and there is no need to send other segments
     if (_sender.consecutive_retransmissions() > TCPConfig::MAX_RETX_ATTEMPTS) {
