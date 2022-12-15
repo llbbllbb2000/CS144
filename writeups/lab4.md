@@ -1,29 +1,13 @@
 Lab 4 Writeup
 =============
 
-My name: [your name here]
+My name: llbbllbb2000
 
-My SUNet ID: [your sunetid here]
+This lab took me about 10 hours to do.
 
-I collaborated with: [list sunetids here]
-
-I would like to thank/reward these classmates for their help: [list sunetids here]
-
-This lab took me about [n] hours to do. I [did/did not] attend the lab session.
-
-Program Structure and Design of the TCPConnection:
-[]
+Ref : blog.csdn.net/LostUnravel/article/details/124870729
 
 Implementation Challenges:
-[]
+1. the most challenging one is to understand the problem, and know that we should extract the TCPSegment from TCPSender and put them into segments_out in TCPConnection, which really confused me at the beginning.
 
-Remaining Bugs:
-[]
-
-- Optional: I had unexpected difficulty with: [describe]
-
-- Optional: I think you could make this lab better by: [describe]
-
-- Optional: I was surprised by: [describe]
-
-- Optional: I'm not sure about: [describe]
+2. felt a little lost when doing it. It was hard to finish and needed to started at some easy points, like the funciton "remaining_outbound_capacity", and then followed the instructions, doing the receiving segments part.

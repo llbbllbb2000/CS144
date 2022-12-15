@@ -17,20 +17,33 @@
 //! segments if the retransmission timer expires.
 class TCPSender {
   private:
+    // the default value of window size is 1, not 0!!!
+    size_t _window_size{1};
+    bool _has_not_syn{true};
+    bool _has_fin{false};
+    size_t _tick_time{0};
+    unsigned int _consecutive_retransmissions{0};
+    size_t _outstanding_bytes{0};
+    std::queue<TCPSegment>_outstanding_segments{};
+
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
-
+ 
     //! outbound queue of segments that the TCPSender wants sent
     std::queue<TCPSegment> _segments_out{};
 
     //! retransmission timer for the connection
     unsigned int _initial_retransmission_timeout;
+    unsigned int _RTO;
 
     //! outgoing stream of bytes that have not yet been sent
     ByteStream _stream;
 
     //! the (absolute) sequence number for the next byte to be sent
     uint64_t _next_seqno{0};
+
+    // make a segment, and the string's length will not exceed window_size and MAX_PAYLOAD_SIZE
+    TCPSegment make_segment(size_t max_len);
 
   public:
     //! Initialize a TCPSender
