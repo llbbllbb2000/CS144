@@ -15,7 +15,7 @@ void get_URL(const string &host, const string &path) {
     // Then you'll need to print out everything the server sends back,
     // (not just one call to read() -- everything) until you reach
     // the "eof" (end of file).
-    CS144TCPSocket URL_socket;
+    FullStackSocket URL_socket;
     URL_socket.connect(Address(host, "http"));
     URL_socket.write("GET " + path + " HTTP/1.1\r\nHost: " + host + "\r\nConnection: close\r\n\r\n");
     while (!URL_socket.eof()) {

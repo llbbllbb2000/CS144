@@ -39,6 +39,14 @@ class NetworkInterface {
 
     //! outbound queue of Ethernet frames that the NetworkInterface wants sent
     std::queue<EthernetFrame> _frames_out{};
+    
+    // a mapping between sender's IP address and Ethernet address for 30!!! seconds
+    std::unordered_map<uint32_t, std::pair<size_t, std::optional<EthernetAddress> >> _cache{};
+
+    // store the IP datagram so it can be sent after the ARP reply is received
+    std::unordered_map<uint32_t, std::queue<std::pair<InternetDatagram, Address> > > _not_sent_dgrams{};
+    
+    size_t _tick{0};
 
   public:
     //! \brief Construct a network interface with given Ethernet (network-access-layer) and IP (internet-layer) addresses
