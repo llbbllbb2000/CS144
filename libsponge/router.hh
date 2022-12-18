@@ -49,6 +49,12 @@ class Router {
     //! datagram's destination address.
     void route_one_datagram(InternetDatagram &dgram);
 
+    // why using uint64_t ?
+    // not only store what the route_prefix is, but also store the prefix_length
+    // by make the prefix_length bits to be 1 (& 1 << prefix_length)
+    // and store (route_prefix >> prefix_length)
+    std::unordered_map<uint64_t, std::pair<std::optional<Address>, size_t> > _route_map{};
+
   public:
     //! Add an interface to the router
     //! \param[in] interface an already-constructed network interface

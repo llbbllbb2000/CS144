@@ -1,29 +1,14 @@
 Lab 6 Writeup
 =============
 
-My name: [your name here]
+My name: llbbllbb2000
 
-My SUNet ID: [your sunetid here]
-
-I collaborated with: [list sunetids here]
-
-I would like to thank/reward these classmates for their help: [list sunetids here]
-
-This lab took me about [n] hours to do. I [did/did not] attend the lab session.
+This lab took me about 3 hours to do.
 
 Program Structure and Design of the Router:
-[]
+Using hashmap to find the longest prefix IP address
+The time complexity of searching the IP should be O(log 32), since IP has 32 bits
 
 Implementation Challenges:
-[]
-
-Remaining Bugs:
-[]
-
-- Optional: I had unexpected difficulty with: [describe]
-
-- Optional: I think you could make this lab better by: [describe]
-
-- Optional: I was surprised by: [describe]
-
-- Optional: I'm not sure about: [describe]
+1. The most absurd and time-consuming problem is the operation "<<" & ">>".
+This is the first time I find that if the variable "i" is 32 bits, then it can do the thing like "i << 32" or "i >> 32", because the result(i does not change) is not I expected(i = 0). I think this is a tricky place that I faced.
